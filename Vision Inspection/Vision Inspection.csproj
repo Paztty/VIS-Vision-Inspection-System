@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <RootNamespace>Vision_Inspection</RootNamespace>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="View\Screens\component_detail_view.jpg" />
+    <None Remove="View\Screens\component_top_view.jpg" />
+    <None Remove="View\Screens\PCB_top_view.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Model\Model data\" />
+    <Folder Include="Model\3D model data\" />
+    <Folder Include="Font\" />
+    <Folder Include="Bussiness logic\" />
+    <Folder Include="Image\" />
+    <Folder Include="User controls\Funtions Controls\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Emgu.CV" Version="4.8.1.5350" />
+    <PackageReference Include="Emgu.CV.runtime.windows" Version="4.8.1.5350" />
+    <PackageReference Include="Emgu.CV.Wpf" Version="4.8.1.5350" />
+    <PackageReference Include="MahApps.Metro.IconPacks" Version="4.11.0" />
+    <PackageReference Include="NetCore5.0.Microsoft.Expression.Drawing" Version="1.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="View\Screens\component_detail_view.jpg" />
+    <Resource Include="View\Screens\component_top_view.jpg" />
+    <Resource Include="View\Screens\PCB_top_view.jpg" />
+  </ItemGroup>
+
+</Project>
