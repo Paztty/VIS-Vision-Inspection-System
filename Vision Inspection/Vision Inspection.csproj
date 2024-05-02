@@ -10,12 +10,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="View\Screens\component_detail_view.jpg" />
-    <None Remove="View\Screens\component_top_view.jpg" />
-    <None Remove="View\Screens\PCB_top_view.jpg" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Folder Include="Model\Model data\" />
     <Folder Include="Model\3D model data\" />
     <Folder Include="Font\" />
@@ -25,17 +19,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Emgu.CV" Version="4.8.1.5350" />
-    <PackageReference Include="Emgu.CV.runtime.windows" Version="4.8.1.5350" />
-    <PackageReference Include="Emgu.CV.Wpf" Version="4.8.1.5350" />
     <PackageReference Include="MahApps.Metro.IconPacks" Version="4.11.0" />
     <PackageReference Include="NetCore5.0.Microsoft.Expression.Drawing" Version="1.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Resource Include="View\Screens\component_detail_view.jpg" />
-    <Resource Include="View\Screens\component_top_view.jpg" />
-    <Resource Include="View\Screens\PCB_top_view.jpg" />
+    <PackageReference Include="OpenCvSharp4" Version="4.9.0.20240103" />
+    <PackageReference Include="OpenCvSharp4.runtime.win" Version="4.9.0.20240103" />
+    <PackageReference Include="OpenCvSharp4.Windows" Version="4.9.0.20240103" />
+    <PackageReference Include="OpenCvSharp4.WpfExtensions" Version="4.9.0.20240103" />
   </ItemGroup>
 
 </Project>

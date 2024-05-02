@@ -5,7 +5,9 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media.Media3D;
 
 namespace Vision_Inspection.Core
 {
@@ -88,5 +90,37 @@ namespace Vision_Inspection.Core
         }
 
         #endregion
+    }
+    public static class GlobalSize
+    {
+        public static readonly Size Default = new Size(1920, 1080);
+        public static (double X, double Y) GetGlobalLocation((double X, double Y) displayPoint, (double Width, double Height) displayParentSize)
+        {
+            (double X, double Y) globalPoint = new();
+            globalPoint.X = Default.Width / displayParentSize.Width * displayPoint.X;
+            globalPoint.Y = Default.Height / displayParentSize.Height * displayPoint.Y;
+            return globalPoint;
+        }
+        public static (double Width, double Height) GetGlobalSize((double Width, double Height) displaySize, (double Width, double Height) displayParentSize)
+        {
+            (double Width, double Height) globalSize = new();
+            globalSize.Width =Default.Width / displayParentSize.Width * displaySize.Width;
+            globalSize.Height = Default.Height/ displayParentSize.Height * displaySize.Height;
+            return globalSize;
+        }
+        public static (double X, double Y) GetDisplayLocation((double X, double Y) globalPoint, (double Width, double Height) displayParentSize)
+        {
+            (double X, double Y) displayPoint = new();
+            displayPoint.X = displayParentSize.Width / Default.Width * globalPoint.X;
+            displayPoint.Y = displayParentSize.Height / Default.Height * globalPoint.Y;
+            return displayPoint;
+        }
+        public static (double Width, double Height) GetDisplaySize((double Width, double Height) globalSize, (double Width, double Height) displayParentSize)
+        {
+            (double Width, double Height) displaySize = new();
+            displaySize.Width = displayParentSize.Width / Default.Width * globalSize.Width;
+            displaySize.Height = displayParentSize.Height / Default.Height * globalSize.Height;
+            return displaySize;
+        }
     }
 }

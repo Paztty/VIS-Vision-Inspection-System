@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using Vision_Inspection.Core;
 
 namespace Vision_Inspection.Model.Steps_data
@@ -52,9 +53,9 @@ namespace Vision_Inspection.Model.Steps_data
 				}
 			}
 		}
-		private string _Location;
+		private Point _Location;
 
-		public string Location
+		public Point Location
 		{
 			get { return _Location; }
 			set

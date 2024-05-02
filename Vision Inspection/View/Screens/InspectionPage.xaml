@@ -6,6 +6,8 @@
              xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
              xmlns:local="clr-namespace:Vision_Inspection.View.Screens"
              xmlns:core="clr-namespace:Vision_Inspection.Core"
+             xmlns:cam ="clr-namespace:Vision_Inspection.Camera"
+             xmlns:ctr="clr-namespace:Vision_Inspection.User_controls.Model_Controls"
              d:DataContext="{d:DesignInstance Type=local:InspectionPage}"
              mc:Ignorable="d" 
              d:DesignHeight="750" d:DesignWidth="1400">
@@ -101,7 +103,8 @@
                         <Label VerticalAlignment="Top" Foreground="{StaticResource Foreground}" Margin="0,0" Background="{StaticResource BackgroundNormal}">
                             Template
                         </Label>
-                        <Image Source="/View/Screens/component_top_view.jpg" Margin="10" Grid.Row="1" Stretch="Uniform"/>
+                        <Image Margin="10" Grid.Row="1" Stretch="Uniform" VerticalAlignment="Center"
+                               HorizontalAlignment="Center"/>
                     </Grid>
                 </Border>
                 <Border Grid.Column="1" Background="#111111" Margin="0"
@@ -114,21 +117,18 @@
                         <Label VerticalAlignment="Top" Foreground="{StaticResource Foreground}" Margin="0,0" Background="{StaticResource BackgroundNormal}">
                             Live location
                         </Label>
-                        <Image Source="/View/Screens/PCB_top_view.jpg" Margin="10" Grid.Row="1" Stretch="Fill"/>
-                        <Line X1="190" Y1="0" X2="190" Y2="500" Stroke="Red" Grid.Row="1"/>
-                        <Line X1="0" Y1="140" X2="500" Y2="140" Stroke="Red" Grid.Row="1"/>
-                        <Rectangle Width="50" Height="50" Stroke="Red" VerticalAlignment="Top"
-                                 HorizontalAlignment="Left" Margin="165,115,0,0" Grid.Row="1"/>
+                        <Image Grid.Row="1"/>
                     </Grid>
                 </Border>
             </Grid>
         </Border>
         
-        <Border Grid.Row="1" Background="#111111" Margin="5,5,0,0" Grid.Column="1" Grid.RowSpan="2"
+        <Border Grid.Row="1" Background="{StaticResource BackgroundNormal}" Margin="5,5,0,0" Grid.Column="1" Grid.RowSpan="2"
                 BorderBrush="{StaticResource BodyTextColorBrush}" BorderThickness="2">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30"/>
+                    <RowDefinition/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <TextBlock VerticalAlignment="Center" Foreground="{StaticResource Foreground}" Margin="10,0">
@@ -149,7 +149,8 @@
                     <Run Text=":" />
                     <Run Text="1300.892" />
                 </TextBlock>
-                <Image Source="/View/Screens/component_detail_view.jpg" Margin="10" Grid.Row="1" Stretch="UniformToFill"/>
+                <cam:CameraViewer Grid.Row="1" Margin="5" Grid.RowSpan="2"/>
+                <ctr:ModelStepsROI x:Name="modelViewer" Grid.Row="1"/>
             </Grid>
         </Border>
         <Border Grid.Row="2" Background="#111111" Margin="0,5,0,0"
@@ -172,18 +173,30 @@
                                   VerticalGridLinesBrush="{StaticResource LightBackground}"
                                   AlternatingRowBackground="{StaticResource LightBackground}"
                                   RowBackground="{StaticResource Background}"
-                                  RowHeight="25" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                                  RowHeight="25" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                  SelectionChanged="dgrSteps_SelectionChanged">
                             <DataGrid.Resources>
                                 <Style TargetType="DataGridColumnHeader">
                                     <Setter Property="Background" Value="{StaticResource LightBackground}"/>
                                     <Setter Property="Foreground" Value="{StaticResource Foreground}"/>
                                     <Setter Property="Padding" Value="10,0"/>
                                     <Setter Property="Height" Value="30"/>
+                                    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
                                 </Style>
                                 <Style TargetType="DataGridCell">
                                     <Setter Property="Foreground" Value="{StaticResource Foreground}"/>
-                                    <Setter Property="VerticalAlignment" Value="Center"/>
+                                    <Setter Property="VerticalContentAlignment" Value="Center"/>
                                     <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="DataGridCell">
+                                                <Border Background="{TemplateBinding Background}">
+                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
                                 </Style>
                             </DataGrid.Resources>
                             <DataGrid.Columns>
@@ -194,7 +207,7 @@
                                 <DataGridTextColumn Header="Result" Binding="{Binding Result}"  Width="1*"/>
                             </DataGrid.Columns>
 
-                            <DataGrid.RowDetailsTemplate>
+                            <!--<DataGrid.RowDetailsTemplate>
                                 <DataTemplate>
                                     <DataGrid ItemsSource="{Binding Units}" Grid.Row="1" Background="{StaticResource BackgroundNormal}"
                                           BorderBrush="{StaticResource BorderBrushNormal}"
@@ -224,7 +237,7 @@
                                         </DataGrid.Columns>
                                     </DataGrid>
                                 </DataTemplate>
-                            </DataGrid.RowDetailsTemplate>
+                            </DataGrid.RowDetailsTemplate>-->
                         </DataGrid>
                     </Grid>
                 </Border>

@@ -20,9 +20,26 @@ namespace Vision_Inspection.Camera
     /// </summary>
     public partial class CameraViewer : UserControl
     {
+        Camera Camera { get; set; } = Camera.GetCamera();
         public CameraViewer()
         {
             InitializeComponent();
+            this.DataContext = Camera;
+        }
+        public void StartCamera()
+        {
+            Camera = Camera.GetCamera();
+            Camera.Start();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Camera.GetBackground();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            Camera.CreateForegroundMark();
         }
     }
 }

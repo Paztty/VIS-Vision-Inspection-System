@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -34,10 +35,45 @@ namespace Vision_Inspection.View.Screens
                 {
                     No = i,
                     Name = "Component " + i.ToString(),
-                    Location = random.Next(1920) + " : "+ random.Next(1080),
+                    Location = new Point(random.Next(1920),random.Next(1080)),
                     Result = "PASS",
                 });
             }
+        }
+        System.Timers.Timer updatePostimer = new()
+        {
+            AutoReset = false,
+            Interval = 100,
+        };
+        private void dgrSteps_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            updatePostimer.Elapsed -= UpdatePostimer_Elapsed;
+            updatePostimer.Stop();
+            updatePostimer.Start();
+            updatePostimer.Elapsed += UpdatePostimer_Elapsed;
+        }
+
+        private void UpdatePostimer_Elapsed(object? sender, ElapsedEventArgs e)
+        {
+            this.Dispatcher.Invoke(new Action(() =>
+            {
+                var grid = dgrSteps;
+                if (grid != null)
+                {
+                    try
+                    {
+                        var step = (Step)grid.SelectedItem;
+                        if (step != null)
+                        {
+                            modelViewer.SetPoint(step.Location);
+                        }
+                    }
+                    catch (Exception)
+                    {
+                    }
+                }
+            }));
+            updatePostimer.Stop();
         }
     }
 }

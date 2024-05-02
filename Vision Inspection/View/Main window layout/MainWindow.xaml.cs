@@ -10,6 +10,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Vision_Inspection.View_Model;
+using Vision_Inspection.Camera;
 
 namespace Vision_Inspection
 {
@@ -27,6 +28,9 @@ namespace Vision_Inspection
         private void Close_Click(object sender, MouseButtonEventArgs e)
         {
             this.Close();
+            Camera.Camera camera = Camera.Camera.GetCamera();
+            camera.Stop();
+            Application.Current.Shutdown();
         }
 
         private void Maximisize_Click(object sender, MouseButtonEventArgs e)
